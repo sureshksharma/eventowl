@@ -1,0 +1,7 @@
+<resources>
+    <declare-styleable name="FullscreenAttrs">
+        <attr name="imageSize" format="integer" />
+        <attr name="attendees" format="reference" />
+        <attr name="speakers" format="reference" />
+    </declare-styleable>
+</resources>

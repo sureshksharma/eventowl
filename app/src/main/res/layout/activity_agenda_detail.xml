@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.agenda.AgendaDetailActivity">
+    
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.craxinno.eventowl.ui.agenda.AgendaDetailViewModel" />
+        <variable
+            name="agendaModel"
+            type="com.craxinno.eventowl.data.models.AgendaModel" />
+        <variable
+            name="agendaDate"
+            type="String" />
+        <variable
+            name="agendaPeriod"
+            type="String" />
+        <variable
+            name="backClickListener"
+            type="android.view.View.OnClickListener" />
+        
+    </data>
+
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/rootLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:fitsSystemWindows="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/person"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+                        <TextView
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            android:text="@{agendaModel.name}"
+                            android:textSize="25sp"
+                            android:textStyle="bold"
+                            app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            app:attendees="@{agendaModel.attendees}"
+                            app:imageSize="@{65}"
+                            android:orientation="horizontal" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@{agendaDate}"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                app:drawableLeftCompat="@drawable/location" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="34dp"
+                                android:paddingEnd="2dp"
+                                android:text="@{agendaPeriod}"
+                                android:textColor="@color/darkGrey"
+                                android:textSize="15sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@{agendaModel.location_name}"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                app:drawableLeftCompat="@drawable/calendar" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="34dp"
+                                android:paddingEnd="2dp"
+                                android:text="1823 Medart Drive Tallahassee, FL 32303"
+                                android:textColor="@color/darkGrey"
+                                android:textSize="15sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <Button
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".5"
+                                android:background="@drawable/button_backgroud"
+                                android:text="Enter Code"
+                                android:textAllCaps="false"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                            <Button
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:layout_weight=".5"
+                                android:background="@drawable/button_backgroud"
+                                android:text="Take Survey"
+                                android:textAllCaps="false"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Speakers"
+                                android:textColor="@color/black"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rvSpeakers"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:nestedScrollingEnabled="false"
+                                app:speakers="@{agendaModel.agenda_speakers}" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Registration Links"
+                                android:textColor="@color/black"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <Button
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="25dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="25dp"
+                                android:background="@drawable/button_backgroud"
+                                android:text="@{agendaModel.register_links[0].register_text}"
+                                android:onClick="@{(view) ->  viewModel.launchUrl(view, agendaModel.register_links[0].register_link)}"
+                                android:textAllCaps="false"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Documents"
+                                android:textColor="@color/black"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <Button
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="25dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="25dp"
+                                android:background="@drawable/button_backgroud"
+                                android:text="@{agendaModel.agenda_documents[0].document_name}"
+                                android:onClick="@{(view) ->  viewModel.launchUrl(view, agendaModel.agenda_documents[0].document_file)}"
+                                android:textAllCaps="false"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Description"
+                                android:textColor="@color/black"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tvDescription"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:text="Description"
+                                android:textColor="@color/black"
+                                android:textSize="18sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@{agendaModel.sponsor_name}"
+                                android:textColor="@color/black"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/ivSponsor"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/ic_launcher_background"
+                                android:src="@drawable/ic_launcher_foreground" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </ScrollView>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="40dp"
+                android:src="@drawable/arrow_back"
+                app:civ_border_color="@color/white"
+                android:onClickListener="@{backClickListener}"
+                app:civ_border_width="2dp" />
+
+        </FrameLayout>
+
+        <ProgressBar
+            android:visibility="invisible"
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    
+</layout>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="agendaModel"
+            type="com.craxinno.eventowl.data.models.AgendaListModel" />
+        <variable
+            name="agendaPeriod"
+            type="String" />
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:padding="20dp"
+        android:onClick="@{clickListener}"
+        android:background="@drawable/card_backgroud"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvAgendaName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{agendaModel.name}"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/ivPeriod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@{agendaPeriod}"
+            android:textColor="@color/lightGrey" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/single_image_view"
+                app:attendees="@{agendaModel.attendees}"
+                app:imageSize="@{40}"
+                android:orientation="horizontal" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>
